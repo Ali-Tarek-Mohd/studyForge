@@ -150,12 +150,12 @@ const howItWorksSteps = [
     title: "Upload Your Materials",
     text: "Upload notes, PDFs, or slides from any of your courses.",
     icon: CloudUpload,
-    ring: "border-blue-400/30",
-    orb: "from-blue-500/22 via-cyan-400/12 to-transparent",
-    glow: "shadow-[0_0_45px_rgba(59,130,246,0.24)]",
+    ring: "border-blue-400/35",
+    orb: "from-blue-500/35 via-cyan-400/18 to-transparent",
+    glow: "shadow-[0_0_55px_rgba(59,130,246,0.35)]",
     iconColor: "text-cyan-300",
-    connector: "from-blue-500/70 via-cyan-400/90 to-cyan-300/70",
-    dot: "bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.95)]",
+    connector: "from-blue-500/10 via-cyan-300/90 to-cyan-300/70",
+    dot: "bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,1)]",
     badge: "from-blue-500 to-violet-600",
   },
   {
@@ -163,12 +163,12 @@ const howItWorksSteps = [
     title: "Generate Study Tools",
     text: "Get quizzes, summaries, mock exams, and plans in seconds.",
     icon: Sparkles,
-    ring: "border-violet-400/30",
-    orb: "from-violet-500/22 via-fuchsia-400/12 to-transparent",
-    glow: "shadow-[0_0_45px_rgba(139,92,246,0.24)]",
+    ring: "border-violet-400/35",
+    orb: "from-violet-500/35 via-fuchsia-400/18 to-transparent",
+    glow: "shadow-[0_0_55px_rgba(139,92,246,0.35)]",
     iconColor: "text-violet-300",
-    connector: "from-violet-500/70 via-cyan-300/90 to-cyan-300/70",
-    dot: "bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.95)]",
+    connector: "from-violet-500/10 via-cyan-300/90 to-cyan-300/70",
+    dot: "bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,1)]",
     badge: "from-blue-500 to-violet-600",
   },
   {
@@ -176,12 +176,12 @@ const howItWorksSteps = [
     title: "Improve with Practice",
     text: "Practice, review mistakes, and keep improving every day.",
     icon: LineChart,
-    ring: "border-teal-400/30",
-    orb: "from-teal-500/22 via-cyan-400/12 to-transparent",
-    glow: "shadow-[0_0_45px_rgba(20,184,166,0.24)]",
+    ring: "border-teal-400/35",
+    orb: "from-teal-500/35 via-cyan-400/18 to-transparent",
+    glow: "shadow-[0_0_55px_rgba(20,184,166,0.35)]",
     iconColor: "text-teal-300",
-    connector: "from-cyan-400/70 via-teal-300/90 to-teal-300/70",
-    dot: "bg-teal-300 shadow-[0_0_14px_rgba(94,234,212,0.95)]",
+    connector: "from-cyan-400/10 via-teal-300/90 to-teal-300/70",
+    dot: "bg-teal-300 shadow-[0_0_16px_rgba(94,234,212,1)]",
     badge: "from-cyan-500 to-teal-500",
   },
 ];
@@ -641,40 +641,55 @@ function HowItWorksStep({
   return (
     <div className="flex flex-1 items-center">
       <div className="flex items-center gap-5">
-        <div className="relative flex h-20 w-20 shrink-0 items-center justify-center">
+        <div className="relative flex h-[92px] w-[92px] shrink-0 items-center justify-center">
           <div
             className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.orb} blur-2xl`}
           />
+
           <div
-            className={`absolute inset-0 rounded-full border ${step.ring} bg-white/[0.02] ${step.glow}`}
+            className={`absolute inset-0 rounded-full border ${step.ring} bg-white/[0.035] ${step.glow}`}
           />
-          <div className="absolute inset-[6px] rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(255,255,255,0.12),transparent_52%)]" />
-          <Icon className={`relative h-9 w-9 ${step.iconColor}`} />
+
+          <div className="absolute inset-[7px] rounded-full border border-white/10 bg-[#071326]/80" />
+
+          <div className="absolute inset-[13px] rounded-full bg-[radial-gradient(circle_at_30%_25%,rgba(255,255,255,0.18),transparent_45%)]" />
+
+          <Icon
+            className={`relative h-10 w-10 ${step.iconColor} drop-shadow-[0_0_12px_rgba(34,211,238,0.55)]`}
+            strokeWidth={2.3}
+          />
         </div>
 
         <div>
           <div className="mb-2 flex items-center gap-3">
             <span
-              className={`flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${step.badge} text-sm font-black shadow-lg`}
+              className={`flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${step.badge} text-sm font-black shadow-lg shadow-blue-500/25`}
             >
               {step.number}
             </span>
-            <h3 className="text-lg font-black">{step.title}</h3>
+
+            <h3 className="text-lg font-black tracking-[-0.02em]">
+              {step.title}
+            </h3>
           </div>
-          <p className="max-w-[260px] text-sm leading-6 text-slate-400">
+
+          <p className="max-w-[270px] text-sm leading-6 text-slate-400">
             {step.text}
           </p>
         </div>
       </div>
 
       {showConnector && (
-        <div className="mx-6 hidden flex-1 items-center lg:flex">
-          <div
-            className={`relative h-[2px] flex-1 bg-gradient-to-r ${step.connector}`}
-          >
-            <div className="absolute left-0 top-1/2 h-[10px] w-[10px] -translate-y-1/2 rounded-full bg-white/0" />
+        <div className="mx-7 hidden flex-1 items-center lg:flex">
+          <div className="relative h-[2px] flex-1 overflow-visible">
             <div
-              className={`absolute right-0 top-1/2 h-[8px] w-[8px] -translate-y-1/2 rounded-full ${step.dot}`}
+              className={`absolute inset-0 rounded-full bg-gradient-to-r ${step.connector} opacity-90`}
+            />
+
+            <div className="absolute inset-0 rounded-full bg-cyan-300/20 blur-sm" />
+
+            <div
+              className={`absolute right-0 top-1/2 h-[9px] w-[9px] -translate-y-1/2 rounded-full ${step.dot}`}
             />
           </div>
         </div>
