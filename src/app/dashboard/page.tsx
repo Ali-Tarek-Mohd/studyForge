@@ -344,7 +344,7 @@ function Pill({ children, color }: { children: string; color: string }) {
   };
 
   return (
-    <span className={`rounded-lg px-3 py-1.5 text-xs font-semibold ${styles[color]}`}>
+    <span className={`whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-semibold ${styles[color]}`}>
       {children}
     </span>
   );
@@ -380,7 +380,7 @@ function TodayStudyPlan() {
         {planItems.map((item) => (
           <div
             key={item.title}
-            className="grid min-h-[54px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-2 md:grid-cols-[118px_44px_minmax(0,1fr)_104px]"
+            className="grid min-h-[54px] items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] px-4 py-2 md:grid-cols-[118px_44px_minmax(210px,0.78fr)_auto]"
           >
             <div className="flex items-center gap-2.5 text-sm text-slate-400">
               <span
@@ -442,7 +442,7 @@ function UpcomingExams() {
         {upcomingExams.map((exam) => (
           <div
             key={exam.title}
-            className="grid min-h-[50px] grid-cols-[48px_minmax(0,1fr)_70px] items-center gap-3 border-b border-white/10 pb-2 last:border-b-0 last:pb-0"
+            className="grid min-h-[50px] grid-cols-[48px_minmax(0,1fr)_82px] items-center gap-3 border-b border-white/10 pb-2 last:border-b-0 last:pb-0"
           >
             <div className="flex h-11 w-11 flex-col items-center justify-center rounded-xl border border-white/10 bg-white/[0.035]">
               <span className="text-[9px] font-bold text-slate-400">{exam.month}</span>
@@ -455,7 +455,7 @@ function UpcomingExams() {
             </div>
 
             <div className="flex justify-end">
-              <span className="rounded-lg bg-violet-500/15 px-3 py-1.5 text-xs font-semibold text-violet-200">
+              <span className="whitespace-nowrap rounded-lg bg-violet-500/15 px-3 py-1.5 text-xs font-semibold text-violet-200">
                 {exam.due}
               </span>
             </div>
@@ -468,8 +468,8 @@ function UpcomingExams() {
 
 function CourseReadiness() {
   return (
-    <Panel className="p-4">
-      <div className="mb-3 flex items-center justify-between">
+    <Panel className="h-full p-4">
+      <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-black tracking-[-0.035em] text-white">
           Course Readiness
         </h2>
@@ -482,20 +482,72 @@ function CourseReadiness() {
         </Link>
       </div>
 
-      <div className="grid items-center gap-4 md:grid-cols-[120px_1fr]">
-        <div className="relative mx-auto flex h-[108px] w-[108px] items-center justify-center rounded-full bg-[conic-gradient(#34d399_0_32%,#3b82f6_32%_72%,rgba(255,255,255,0.08)_72%_100%)] p-[10px] shadow-[0_0_35px_rgba(59,130,246,0.22)]">
-          <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-[#071326]">
-            <span className="text-3xl font-black tracking-[-0.06em] text-white">
+      <div className="grid items-center gap-5 md:grid-cols-[132px_1fr]">
+        <div className="relative mx-auto flex h-[124px] w-[124px] items-center justify-center">
+          <div className="absolute inset-0 rounded-full bg-cyan-400/10 blur-xl" />
+
+          <svg className="relative h-full w-full -rotate-90" viewBox="0 0 120 120">
+            <circle
+              cx="60"
+              cy="60"
+              r="48"
+              fill="none"
+              stroke="rgba(148,163,184,0.13)"
+              strokeWidth="12"
+            />
+            <circle
+              cx="60"
+              cy="60"
+              r="48"
+              fill="none"
+              stroke="url(#readinessGradientOne)"
+              strokeWidth="12"
+              strokeLinecap="round"
+              strokeDasharray="95 302"
+              strokeDashoffset="0"
+              className="drop-shadow-[0_0_8px_rgba(52,211,153,0.55)]"
+            />
+            <circle
+              cx="60"
+              cy="60"
+              r="48"
+              fill="none"
+              stroke="url(#readinessGradientTwo)"
+              strokeWidth="12"
+              strokeLinecap="round"
+              strokeDasharray="122 302"
+              strokeDashoffset="-112"
+              className="drop-shadow-[0_0_8px_rgba(59,130,246,0.55)]"
+            />
+            <defs>
+              <linearGradient id="readinessGradientOne" x1="0" y1="0" x2="120" y2="120">
+                <stop stopColor="#34d399" />
+                <stop offset="1" stopColor="#22d3ee" />
+              </linearGradient>
+              <linearGradient id="readinessGradientTwo" x1="0" y1="0" x2="120" y2="120">
+                <stop stopColor="#3b82f6" />
+                <stop offset="1" stopColor="#8b5cf6" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <div className="absolute inset-[18px] flex flex-col items-center justify-center rounded-full bg-[#071326]/95 shadow-inner">
+            <span className="text-[2.05rem] font-black leading-none tracking-[-0.06em] text-white">
               72%
             </span>
-            <span className="text-[10px] text-slate-400">Overall Readiness</span>
+            <span className="mt-1 text-[10px] leading-none text-slate-400">
+              Overall
+            </span>
+            <span className="text-[10px] leading-none text-slate-400">
+              Readiness
+            </span>
           </div>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3.5">
           {readiness.map((item) => (
             <div key={item.name}>
-              <div className="mb-1 flex items-center justify-between text-xs">
+              <div className="mb-1.5 flex items-center justify-between text-xs">
                 <span className="font-semibold text-white">{item.name}</span>
                 <span className="text-slate-400">{item.value}%</span>
               </div>
@@ -510,7 +562,7 @@ function CourseReadiness() {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center gap-2 border-t border-white/10 pt-3 text-xs text-slate-400">
+      <div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-3 text-xs text-slate-400">
         <span className="text-emerald-300">↗</span>
         <span>Keep going! You&apos;re making great progress.</span>
       </div>
@@ -547,7 +599,7 @@ function QuickActions() {
   ];
 
   return (
-    <Panel className="p-4">
+    <Panel className="h-full p-4">
       <h2 className="text-lg font-black tracking-[-0.035em] text-white">
         Quick Actions
       </h2>
@@ -654,11 +706,11 @@ export default function DashboardPage() {
               </p>
             </div>
 
-            <div className="grid items-start gap-4 xl:grid-cols-[1.48fr_1fr]">
+            <div className="grid items-start gap-4 xl:grid-cols-[1.4fr_1fr]">
               <div className="space-y-4">
                 <TodayStudyPlan />
 
-                <div className="grid items-start gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+                <div className="grid items-stretch gap-4 lg:grid-cols-[1.18fr_0.82fr]">
                   <CourseReadiness />
                   <QuickActions />
                 </div>
