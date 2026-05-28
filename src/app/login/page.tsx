@@ -613,6 +613,28 @@ export default function LoginPage() {
       <style>{`
         html, body { height: 100%; overflow: hidden; background: #020716; }
         button { border: 0; background: none; font-family: inherit; cursor: pointer; }
+        *, *::before, *::after { box-sizing: border-box; }
+        .login-page-shell {
+          min-height: 100vh;
+          overflow-x: hidden;
+          overflow-y: hidden;
+        }
+        .login-main {
+          padding-top: clamp(22px, 3.5vh, 42px);
+        }
+        .login-layout {
+          max-width: 1450px;
+          grid-template-columns: minmax(0, 1.05fr) minmax(460px, 0.95fr);
+          justify-content: center;
+          align-items: start;
+          gap: clamp(48px, 3.8vw, 72px);
+        }
+        .desktop-visual {
+          display: block;
+        }
+        .badge-row-desktop {
+          display: flex;
+        }
         .dashboard-perspective {
           transform: perspective(1200px) rotateX(1deg) rotateY(-4deg) rotateZ(-1deg);
           transform-origin: 52% 50%;
@@ -623,40 +645,201 @@ export default function LoginPage() {
         .float-pdf { animation: floatPdf 5.2s ease-in-out infinite; }
         .float-note { animation: floatNote 4.8s ease-in-out infinite .3s; }
         .float-grade { animation: floatGrade 4.4s ease-in-out infinite .8s; }
+        .premium-center-bloom {
+          position: fixed;
+          left: 42%;
+          top: 18%;
+          z-index: 0;
+          width: 560px;
+          height: 560px;
+          pointer-events: none;
+          border-radius: 9999px;
+          background: radial-gradient(circle, rgba(58,118,255,0.16) 0%, rgba(130,70,255,0.11) 42%, transparent 72%);
+          filter: blur(70px);
+        }
         @media (max-width: 1180px) {
           html, body { overflow: auto; }
           .dashboard-perspective { transform: perspective(1000px) rotateY(-3deg) rotateX(1deg); }
+        }
+        @media (max-width: 1023px) {
+          html, body {
+            width: 100%;
+            max-width: 100vw;
+            height: auto;
+            min-height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
+          .login-page-shell {
+            width: 100%;
+            max-width: 100vw;
+            height: auto;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+          }
+          .login-main {
+            width: 100%;
+            max-width: 100vw;
+            min-height: auto !important;
+            flex: 0 0 auto !important;
+            padding: 22px 16px 22px !important;
+            justify-content: flex-start !important;
+          }
+          .login-layout {
+            transform: none;
+            display: flex !important;
+            width: min(100%, 340px) !important;
+            max-width: 340px !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            height: auto !important;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px !important;
+          }
+          .left-panel {
+            width: 100% !important;
+            max-width: 340px !important;
+            align-items: center;
+            text-align: center;
+          }
+          .left-panel > div[style] {
+            margin-top: 24px !important;
+          }
+          .desktop-visual,
+          .badge-row-desktop {
+            display: none !important;
+          }
+          .mobile-brand {
+            justify-content: center;
+          }
+          .mobile-title {
+            width: 100% !important;
+            max-width: 318px !important;
+            font-size: clamp(1.78rem, 7.2vw, 2rem) !important;
+            line-height: 1.06 !important;
+            letter-spacing: -0.055em !important;
+          }
+          .mobile-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 320px !important;
+            font-size: 15px !important;
+            line-height: 1.55 !important;
+          }
+          .login-panel-section {
+            width: 100% !important;
+            max-width: 340px !important;
+            margin-top: 0 !important;
+          }
+          .login-card-mobile {
+            width: 100% !important;
+            max-width: 340px !important;
+            padding: 20px !important;
+            border-radius: 22px !important;
+          }
+          .login-card-mobile input {
+            min-width: 0 !important;
+          }
+          .login-card-mobile button {
+            min-width: 0;
+          }
+          .login-card-mobile .justify-between {
+            gap: 12px !important;
+          }
+          .premium-center-bloom {
+            left: 8%;
+            top: 18%;
+            width: 360px;
+            height: 360px;
+            opacity: 0.72;
+          }
+          footer {
+            width: 100vw;
+            max-width: 100vw;
+            overflow: hidden;
+            height: auto !important;
+            min-height: 72px;
+            padding: 14px 16px;
+          }
+          footer > div {
+            max-width: calc(100vw - 32px);
+            gap: 8px 18px !important;
+          }
+          .footer-copy {
+            width: 100%;
+            white-space: normal;
+          }
+        }
+        @media (max-width: 420px) {
+          .login-layout {
+            transform: translateX(-36px);
+          }
+          .login-layout,
+          .left-panel,
+          .login-panel-section {
+            width: calc(100vw - 32px) !important;
+            max-width: 318px !important;
+          }
+          .mobile-title {
+            max-width: 300px !important;
+            font-size: clamp(1.72rem, 7.15vw, 1.88rem) !important;
+          }
+          .mobile-subtitle {
+            max-width: 300px !important;
+          }
+          .login-card-mobile {
+            max-width: 318px !important;
+            padding: 16px !important;
+          }
+          .login-card-mobile > div:first-child {
+            margin-bottom: 22px !important;
+            padding: 5px !important;
+          }
+          .login-card-mobile > div:first-child button {
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
+            font-size: 12px !important;
+          }
+          .login-card-mobile .justify-between {
+            align-items: flex-start !important;
+            flex-direction: column !important;
+          }
+          .footer-copy {
+            font-size: 11px;
+          }
         }
         @media (max-width: 720px) {
           .dashboard-perspective { transform: none; }
         }
       `}</style>
 
-      <div className="relative flex h-screen flex-col overflow-hidden bg-[radial-gradient(circle_at_12%_14%,rgba(22,78,173,0.26),transparent_34%),radial-gradient(circle_at_77%_27%,rgba(85,40,151,0.2),transparent_36%),linear-gradient(135deg,#020716_0%,#050d25_46%,#060a19_100%)] font-[var(--font-plus-jakarta),var(--font-geist-sans),system-ui,sans-serif] text-white">
+      <div className="login-page-shell relative flex h-screen flex-col overflow-hidden bg-[radial-gradient(circle_at_12%_14%,rgba(22,78,173,0.26),transparent_34%),radial-gradient(circle_at_77%_27%,rgba(85,40,151,0.2),transparent_36%),linear-gradient(135deg,#020716_0%,#050d25_46%,#060a19_100%)] font-[var(--font-plus-jakarta),var(--font-geist-sans),system-ui,sans-serif] text-white">
         <Particles />
         <div className="pointer-events-none fixed -left-44 -top-44 z-0 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(47,112,255,0.22),transparent_68%)] blur-3xl" />
-        <div className="pointer-events-none fixed bottom-[-180px] left-[30%] z-0 h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(122,64,255,0.17),transparent_70%)] blur-3xl" />
-        <div className="pointer-events-none fixed right-[-170px] top-[34%] z-0 h-[470px] w-[470px] rounded-full bg-[radial-gradient(circle,rgba(48,128,255,0.1),transparent_70%)] blur-3xl" />
+        <div className="premium-center-bloom" />
+        <div className="pointer-events-none fixed bottom-[-180px] left-[28%] z-0 h-[620px] w-[620px] rounded-full bg-[radial-gradient(circle,rgba(122,64,255,0.2),transparent_70%)] blur-3xl" />
+        <div className="pointer-events-none fixed right-[-150px] top-[20%] z-0 h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(132,72,255,0.16),transparent_70%)] blur-3xl" />
 
-        <main className="relative z-10 flex min-h-0 flex-1 items-start justify-center px-6 pb-2 lg:px-10" style={{ paddingTop: "clamp(22px, 3.5vh, 42px)" }}>
+        <main className="login-main relative z-10 flex min-h-0 flex-1 items-start justify-center px-6 pb-2 lg:px-10">
           <div
-            className="grid h-full w-full items-start"
+            className="login-layout grid h-full w-full items-start"
             style={{
-              maxWidth: 1680,
-              gridTemplateColumns: "minmax(680px, 780px) minmax(460px, 540px)",
-              justifyContent: "space-between",
-              gap: 56,
+              maxWidth: 1450,
+              gridTemplateColumns: "minmax(0, 1.05fr) minmax(460px, 0.95fr)",
+              gap: 64,
             }}
           >
-            <section className="relative mx-0 flex w-full flex-col" style={{ maxWidth: 780 }}>
-              <div className="relative z-20 flex items-center gap-4">
+            <section className="left-panel relative mx-0 flex w-full flex-col" style={{ maxWidth: 780 }}>
+              <div className="mobile-brand relative z-20 flex items-center gap-4">
                 <BrandMark />
                 <span className="text-[25px] font-black tracking-[-0.04em] text-white md:text-[28px]">StudyForge</span>
               </div>
 
               <div className="relative z-20" style={{ marginTop: "clamp(26px, 4vh, 44px)" }}>
                 <h1
-                  className="font-black text-white"
+                  className="mobile-title font-black text-white"
                   style={{
                     maxWidth: 660,
                     fontSize: "clamp(2.5rem, 3.75vw, 3.75rem)",
@@ -671,7 +854,7 @@ export default function LoginPage() {
                   <span className="bg-gradient-to-r from-[#22a7ff] via-[#5f7cff] to-[#a85cff] bg-clip-text text-transparent">smarter habits.</span>
                 </h1>
                 <p
-                  className="text-slate-300/82"
+                  className="mobile-subtitle text-slate-300/82"
                   style={{ marginTop: "clamp(14px, 2vh, 22px)", maxWidth: 390, fontSize: 17, lineHeight: 1.62, letterSpacing: "-0.01em" }}
                 >
                   Upload materials, generate quizzes,
@@ -680,7 +863,7 @@ export default function LoginPage() {
                 </p>
               </div>
 
-              <div className="relative z-20 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ marginTop: "clamp(15px, 2.4vh, 24px)" }}>
+              <div className="badge-row-desktop relative z-20 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ marginTop: "clamp(15px, 2.4vh, 24px)" }}>
                 {badges.map(({ icon: Icon, label, sub, color, glow }, index) => (
                   <div key={label} className="flex items-center gap-3">
                     <div className={`flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.045] shadow-lg ${glow} backdrop-blur-md`}>
@@ -695,7 +878,7 @@ export default function LoginPage() {
                 ))}
               </div>
 
-              <div className="relative h-[360px] w-full" style={{ marginTop: "clamp(10px, 1.9vh, 18px)" }}>
+              <div className="desktop-visual relative h-[360px] w-full" style={{ marginTop: "clamp(10px, 1.9vh, 18px)" }}>
                 <OrbitField />
                 <FloatingCard className="float-pdf left-[-26px] top-[96px]" glow="bg-violet-500/35">
                   <div className="relative flex h-[66px] w-[58px] flex-col items-center justify-center gap-1 rounded-[17px] border border-white/15 bg-gradient-to-br from-[#a75cff] to-[#5424e9] text-white shadow-[0_16px_42px_rgba(116,64,255,0.56),inset_0_1px_0_rgba(255,255,255,0.24)]">
@@ -719,8 +902,8 @@ export default function LoginPage() {
               </div>
             </section>
 
-            <section className="mx-0 w-full" style={{ maxWidth: 540, marginTop: "clamp(16px, 4.5vh, 46px)" }}>
-              <div className="rounded-[24px] border border-blue-400/24 bg-[linear-gradient(145deg,rgba(12,20,52,0.92),rgba(8,13,36,0.96))] p-8 shadow-[0_0_0_1px_rgba(79,140,255,0.07),0_36px_90px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-3xl">
+            <section className="login-panel-section mx-0 w-full" style={{ maxWidth: 520, marginTop: "clamp(16px, 4.5vh, 46px)" }}>
+              <div className="login-card-mobile rounded-[24px] border border-blue-400/24 bg-[linear-gradient(145deg,rgba(12,20,52,0.92),rgba(8,13,36,0.96))] p-8 shadow-[0_0_0_1px_rgba(79,140,255,0.07),0_36px_90px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-3xl">
                 {view !== "forgot" && (
                   <div className="mb-8 flex rounded-[14px] border border-blue-300/15 bg-white/[0.055] p-1.5">
                     {(["login", "register"] as const).map((v) => (
@@ -754,7 +937,7 @@ export default function LoginPage() {
             <span className="flex items-center gap-1.5">
               <Shield size={12} /> Privacy first
             </span>
-            <span>© 2026 StudyForge. All rights reserved.</span>
+            <span className="footer-copy">© 2026 StudyForge. All rights reserved.</span>
           </div>
         </footer>
       </div>
